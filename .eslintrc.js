@@ -23,6 +23,5 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
 
     'no-unused-vars': 'error',
-    'no-unused-comments': 'error',
   },
 };

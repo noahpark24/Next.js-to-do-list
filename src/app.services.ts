@@ -1,7 +1,6 @@
 import { Injectable, Res } from '@nestjs/common';
 import { Response } from 'express';
 
-//Antes de enviar una respuesta se ejecuta el decorador @Res()
 @Injectable()
 export class ResponsesService {
   success(@Res() res: Response, message: string, statusCode?: number) {

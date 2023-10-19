@@ -1,12 +1,16 @@
+import * as cors from 'cors';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { config } from 'dotenv';
+config();
+
+const port = process.env.SERVER_PORT || '3001';
 
 async function bootstrap() {
-  //Nest factory.create carga un modulo principal que sera el encargado de cargar los demas modulos de la api
   const app = await NestFactory.create(AppModule);
-  //Para usar las validaciones se debe agregar esta linea a main.ts
   app.useGlobalPipes(new ValidationPipe());
-  await app.listen(8080);
+  app.use(cors({ origin: process.env.FRONT_URL, credentials: true }));
+  await app.listen(port);
 }
 bootstrap();

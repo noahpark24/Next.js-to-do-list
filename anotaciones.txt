@@ -24,6 +24,7 @@ app.useGlobalPipes(new ValidationPipe()); : Para usar las validaciones se debe a
 //SEQUELIZE
 Para usar sequelize con nest.js entrar aqui : https://docs.nestjs.com/techniques/database#sequelize-integration
 
-no olvidarse de instalar pg , en dialect en lugar de mysql se pone postgre
+no olvidarse de instalar pg , en dialect en lugar de mysql se pone postgres
 
 EL PUERTO DE LA DB NO DEBE SER EL MISMO QUE EL DE MAIN.TS
+

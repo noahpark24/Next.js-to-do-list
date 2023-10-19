@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   Res,
@@ -13,7 +14,11 @@ import { Response } from 'express';
 import { TasksService } from './tasks.service';
 import { ResponsesService } from 'src/app.services';
 //Data Transfer Objects
-import { CreateTaskDto, UpdateTaskDto } from './dto/task.dto';
+import {
+  CreateTaskDto,
+  UpdateTaskDto,
+  UpdateTaskStatusDto,
+} from './dto/task.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -60,6 +65,20 @@ export class TasksController {
   ) {
     try {
       await this.taskServices.updateTask(id, updatedFields);
+      this.responses.success(res, 'Task Updated Succesfully', 200);
+    } catch (error) {
+      this.responses.error(res, error, 500);
+    }
+  }
+
+  @Patch(':id')
+  async updateTaskStatus(
+    @Res() res: Response,
+    @Param('id') id: string,
+    @Body() newStatus: UpdateTaskStatusDto,
+  ) {
+    try {
+      await this.taskServices.updateTask(id, newStatus);
       this.responses.success(res, 'Task Updated Succesfully', 200);
     } catch (error) {
       this.responses.error(res, error, 500);
