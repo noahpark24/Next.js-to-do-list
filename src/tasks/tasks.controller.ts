@@ -40,8 +40,11 @@ export class TasksController {
   @Post()
   async createTask(@Res() res: Response, @Body() newTask: CreateTaskDto) {
     try {
-      await this.taskServices.createTask(newTask.title, newTask.description);
-      this.responses.success(res, 'task created successfully', 201);
+      const validation = await this.taskServices.getTaskByTitle(newTask.title);
+      if (!validation) {
+        await this.taskServices.createTask(newTask.title, newTask.description);
+        this.responses.success(res, 'task created successfully', 201);
+      }
     } catch (error) {
       this.responses.error(res, error, 500);
     }

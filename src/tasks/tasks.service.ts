@@ -22,9 +22,17 @@ export class TasksService {
     return task;
   }
 
+  async getTaskByTitle(title: string) {
+    const task = await this.taskModel.findOne({ where: { title: title } });
+    return task;
+  }
+
   async createTask(title: string, description: string) {
-    const newTask = await this.taskModel.create({ title, description });
-    return newTask;
+    const validation = await this.getTaskByTitle(title);
+    if (!validation) {
+      const newTask = await this.taskModel.create({ title, description });
+      return newTask;
+    }
   }
 
   async updateTask(id: string, updatedFields: UpdateTaskDto) {
