@@ -1,9 +1,14 @@
 import { Module } from '@nestjs/common';
-import { TasksModule } from './tasks/tasks.module';
 import { SequelizeModule } from '@nestjs/sequelize';
+//Models
 import { TasksModel } from './tasks/tasks.model';
+//Modules
+import { TasksModule } from './tasks/tasks.module';
+//Services
 import { ResponsesService } from './app.services';
+//Config
 import { config } from 'dotenv';
+
 config();
 
 @Module({

@@ -1,7 +1,9 @@
-import * as cors from 'cors';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+//Module
+import { AppModule } from './app.module';
+//Config
+import * as cors from 'cors';
 import { config } from 'dotenv';
 config();
 
