@@ -5,7 +5,7 @@ const AddTask = () => {
   return (
     <div className="container mx-auto">
       <div className="list-wrapper">
-        {/*List Header*/}
+        {/*Header*/}
         <div className="header">
           <h1>Add New Task</h1>
         </div>

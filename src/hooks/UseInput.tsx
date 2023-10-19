@@ -9,7 +9,11 @@ const UseInput = () => {
     setValue(e.target.value);
   };
 
-  return { onChange, value };
+  const clear = () => {
+    setValue('');
+  };
+
+  return { onChange, value, clear };
 };
 
 export default UseInput;

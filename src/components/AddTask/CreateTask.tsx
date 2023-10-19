@@ -17,6 +17,8 @@ const CreateTask = () => {
         description: description.value,
       };
       await taskService.createTask(newTask);
+      title.clear();
+      description.clear();
     }
   };
   return (
