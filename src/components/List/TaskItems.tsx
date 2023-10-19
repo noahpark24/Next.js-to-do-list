@@ -39,6 +39,8 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
   };
 
   const stopEditing = () => {
+    newTitle.clear();
+    newDescription.clear();
     setEditingTask(null);
   };
 

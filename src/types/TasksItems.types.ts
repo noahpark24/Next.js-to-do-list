@@ -15,6 +15,7 @@ export type Task = {
 export type UseInputType = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
+  clear: () => void;
 };
 
 export type createTaskDto = {

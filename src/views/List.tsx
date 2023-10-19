@@ -6,10 +6,13 @@ import TaskItem from '@/components/List/TaskItems';
 import taskService from '@/services/task.service';
 //Types
 import { Task } from '@/types/TasksItems.types';
+import Pagination from '@/components/List/Pagination';
 
 const List = () => {
   const [filter, setFilter] = useState('ALL');
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const tasksPerPage: number = 4;
 
   useEffect(() => {
     const getTasks = async () => {
@@ -19,6 +22,7 @@ const List = () => {
     getTasks();
   }, [tasks]);
 
+  //Filter logic
   const filterTasks = (filter: string) => {
     setFilter(filter);
   };
@@ -27,6 +31,17 @@ const List = () => {
     if (filter === 'ALL') return true;
     return task.state === filter;
   });
+
+  //Pagination logic
+  const totalPages = Math.ceil(filteredTasks.length / tasksPerPage);
+
+  const indexOfLastTask = currentPage * tasksPerPage;
+
+  const indexOfFirstTask = indexOfLastTask - tasksPerPage;
+
+  const currentTasks = filteredTasks.slice(indexOfFirstTask, indexOfLastTask);
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
     <div className="container mx-auto">
@@ -59,9 +74,18 @@ const List = () => {
         </div>
 
         {/*Tasks List*/}
-        {filteredTasks.map((task) => (
-          <TaskItem key={task.id} task={task} />
-        ))}
+        <div className="task-container">
+          {currentTasks.map((task) => (
+            <TaskItem key={task.id} task={task} />
+          ))}
+        </div>
+
+        {/*Pagination*/}
+        <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          paginate={paginate}
+        />
       </div>
     </div>
   );
